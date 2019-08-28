@@ -9,11 +9,44 @@
 <body>
     <div id="app">
         <h1>{{ titulo }}</h1>
-        <div>
-            Id: {{ usuario.id }}
-            Nome: {{ usuario.nome }}
-            Profissão: {{ usuario.profissao }}
-        </div>
+        <label for="">Nome</label><br>
+        <input type="text" v-model="nome">
+
+        <br><br>
+        <label for="">Telefone</label><br>
+        <input type="text" v-model="telefone">
+
+        <br><br>
+        <label for="">Deseja receber essas novidades?</label><br>
+        <input type="radio" value="Sim" v-model="novidades" name="novidades"> Sim 
+        <input type="radio" value="Não" v-model="novidades" name="novidades"> Não
+
+        <br><br>
+        <label for="">Interesses</label><br>
+        <input type="checkbox" value="Futebol" v-model="interesses"> Futebol <br>
+        <input type="checkbox" value="Formula" v-model="interesses"> Formula 1 <br>
+        <input type="checkbox" value="Corrida" v-model="interesses"> Corrida <br>
+
+        <br><br>
+        <label for="">Como nos conheceu?</label><br>
+        <select v-model="conheceu">
+            <option value="">Escolha</option>
+            <option value="Google">Google</option>
+            <option value="TV">TV</option>
+            <option value="Revista">Revista</option>
+        </select>
+
+        <br><br>
+        <button>ENVIAR</button>
+
+        <br><br>
+
+        Nome: {{ nome }} <br>
+        Telefone: {{ telefone }} <br>
+        Novidades: {{ novidades }} <br>
+        Interesses: {{ interesses }} <br>
+        Como Nos Conheceu: {{ conheceu }} <br>
+        
     </div>
 
     <script src="https://unpkg.com/vue"></script>
@@ -23,11 +56,11 @@
             el: "#app",
             data: {
                 titulo: "Aula 01 - Vuejs do jeito ninja",
-                usuario:{
-                    id: 1,
-                    nome: 'Jon Snow',
-                    profissao: "Ator"
-                }
+                nome: "",
+                telefone: "",
+                novidades: "",
+                interesses: [],
+                conheceu: ""
             }
         });
     </script>
