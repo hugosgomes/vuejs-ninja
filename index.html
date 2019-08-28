@@ -5,62 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aula 01 - Vuejs do jeito ninja</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
     <div id="app">
         <h1>{{ titulo }}</h1>
-        <label for="">Nome</label><br>
-        <input type="text" v-model="nome">
-
-        <br><br>
-        <label for="">Telefone</label><br>
-        <input type="text" v-model="telefone">
-
-        <br><br>
-        <label for="">Deseja receber essas novidades?</label><br>
-        <input type="radio" value="Sim" v-model="novidades" name="novidades"> Sim 
-        <input type="radio" value="Não" v-model="novidades" name="novidades"> Não
-
-        <br><br>
-        <label for="">Interesses</label><br>
-        <input type="checkbox" value="Futebol" v-model="interesses"> Futebol <br>
-        <input type="checkbox" value="Formula" v-model="interesses"> Formula 1 <br>
-        <input type="checkbox" value="Corrida" v-model="interesses"> Corrida <br>
-
-        <br><br>
-        <label for="">Como nos conheceu?</label><br>
-        <select v-model="conheceu">
-            <option value="">Escolha</option>
-            <option value="Google">Google</option>
-            <option value="TV">TV</option>
-            <option value="Revista">Revista</option>
-        </select>
-
-        <br><br>
-        <button>ENVIAR</button>
-
-        <br><br>
-
-        Nome: {{ nome }} <br>
-        Telefone: {{ telefone }} <br>
-        Novidades: {{ novidades }} <br>
-        Interesses: {{ interesses }} <br>
-        Como Nos Conheceu: {{ conheceu }} <br>
-        
+        <button class="btn" v-bind:class="btnClassLimpar" :style="bntStyleLimpar">Limpar</button>
+        <button class="btn" v-bind:class="btnClassEnviar" :style="bntStyleEnviar">Enviar</button>
     </div>
-
-    <script src="https://unpkg.com/vue"></script>
     
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
     <script>
         var app = new Vue({
             el: "#app",
             data: {
                 titulo: "Aula 01 - Vuejs do jeito ninja",
-                nome: "",
-                telefone: "",
-                novidades: "",
-                interesses: [],
-                conheceu: ""
+                btnClassLimpar: {
+                    'btn-danger': true,
+                    'btn-sm': true,
+                },
+                btnClassEnviar: [
+                    "btn-primary", "btn-lg"
+                ] ,
+                bntStyleLimpar: [
+                    {'font-size': '50px'},
+                    {'text-transform': 'lowercase'}
+                ],
+                bntStyleEnviar: {
+                    'font-size': '10px'
+                }
             }
         });
     </script>
