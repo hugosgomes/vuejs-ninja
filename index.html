@@ -10,12 +10,7 @@
 <body>
     <div id="app">
         <h1>{{ titulo }}</h1>
-        <ul>
-            <li v-for="usuario in usuarios">{{ usuario.nome | truncate('10') }}</li>
-        </ul>
-        <form @submit.prevent action="http://google.com">
-            <button class="btn btn-primary" v-on:click="enviar()">Enviar</button>
-        </form>        
+        {{ fullName }}
     </div>
     
     <script src="https://unpkg.com/vue"></script>
@@ -25,32 +20,21 @@
 
             data: {
                 titulo: "Aula 01 - Vuejs do jeito ninja",
-                usuarios:[
-                    {nome: 'Jon Snow'},
-                    {nome: 'Tyrion Lannister'},
-                    {nome: 'Daenerys Tagaryen'},
-                ]
+                firstName: "",
+                lastName: "",
+                //fullName: ""
             },
 
-            filters: {
-                toUpperCase(str, param1, param2){
-                    return str.toUpperCase();
-                },
-
-                truncate(str, length){
-                    var output = str;
-                    if (output.length > length) {
-                        output = str.substring(0, length) + ' ...';
-                    }
-                    return output;
+            computed: {
+                fullName(){
+                    return this.firstName + ' ' + this.lastName;
                 }
             },
 
-            methods: {
-                enviar(){
-                    alert('Enviado!');
-                }
-            }
+            watch: {
+            },
+
+            methods: {}
         });
     </script>
 </body>
