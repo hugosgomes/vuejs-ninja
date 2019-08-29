@@ -10,31 +10,45 @@
 <body>
     <div id="app">
         <h1>{{ titulo }}</h1>
-        <button class="btn" v-bind:class="btnClassLimpar" :style="bntStyleLimpar">Limpar</button>
-        <button class="btn" v-bind:class="btnClassEnviar" :style="bntStyleEnviar">Enviar</button>
+        <ul>
+            <li v-for="usuario in usuarios">{{ usuario.nome | truncate('10') }}</li>
+        </ul>
+        <form @submit.prevent action="http://google.com">
+            <button class="btn btn-primary" v-on:click="enviar()">Enviar</button>
+        </form>        
     </div>
     
     <script src="https://unpkg.com/vue"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
     <script>
         var app = new Vue({
             el: "#app",
+
             data: {
                 titulo: "Aula 01 - Vuejs do jeito ninja",
-                btnClassLimpar: {
-                    'btn-danger': true,
-                    'btn-sm': true,
+                usuarios:[
+                    {nome: 'Jon Snow'},
+                    {nome: 'Tyrion Lannister'},
+                    {nome: 'Daenerys Tagaryen'},
+                ]
+            },
+
+            filters: {
+                toUpperCase(str, param1, param2){
+                    return str.toUpperCase();
                 },
-                btnClassEnviar: [
-                    "btn-primary", "btn-lg"
-                ] ,
-                bntStyleLimpar: [
-                    {'font-size': '50px'},
-                    {'text-transform': 'lowercase'}
-                ],
-                bntStyleEnviar: {
-                    'font-size': '10px'
+
+                truncate(str, length){
+                    var output = str;
+                    if (output.length > length) {
+                        output = str.substring(0, length) + ' ...';
+                    }
+                    return output;
+                }
+            },
+
+            methods: {
+                enviar(){
+                    alert('Enviado!');
                 }
             }
         });
