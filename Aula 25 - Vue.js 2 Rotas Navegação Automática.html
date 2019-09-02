@@ -22,10 +22,6 @@
             {
             opacity: 0;
         }
-        .dark{
-            color: #fff;
-            background-color: #000;
-        }
     </style>
 </head>
 
@@ -36,15 +32,8 @@
             <h1>{{ titulo }}</h1>
 
             <ul>
-                <li>
-                    <router-link v-bind:to="{name: 'transformers'}">Transformers</router-link><br>
-                </li>
-                <li>
-                    <router-link v-bind:to="{name: 'gameOfThrones'}">Game Of Thrones</router-link>
-                </li>
-                <li>
-                    <router-link to="/arrow">Arrow</router-link>
-                </li>
+                <li><router-link v-bind:to="{name: 'transformers'}">Transformers</router-link><br></li>
+                <li><router-link v-bind:to="{name: 'gameOfThrones'}">Game Of Thrones</router-link></li>
             </ul>
 
             <router-view></router-view>
@@ -54,9 +43,6 @@
     <template id="transformers">
         <div>
             <div class="row">
-                <div :class="['col', { dark: sidebar == 'dark' }]">
-                    Sidebar
-                </div>
                 <div class="col">
                     <h4>Transformers</h4>
                     <ul>
@@ -70,7 +56,7 @@
                 <div class="col">
                     <router-view></router-view>
                 </div>
-            </div>
+            </div>            
         </div>
     </template>
 
@@ -90,13 +76,6 @@
         </div>
     </template>
 
-    <template id="error404">
-        <div>
-            <h1>Página Não Encontrada</h1>
-            <p>Ops! Parece que está página não existe.</p>
-        </div>
-    </template>
-
     <script src="https://unpkg.com/vue"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
@@ -104,16 +83,10 @@
 
         var Transformers = Vue.component('transformers', {
             template: '#transformers',
-            props: {
-                sidebar: String,
-            },
-            created() {
-                console.log(this.sidebar);
-            },
             data() {
                 return {
                     transformers: [
-                        { name: 'Optmus Prime', slug: 'optmus-prime' },
+                        { name: 'Optmus Prime', slug: 'optmus-prime'},
                         { name: 'Bumble Bee', slug: 'bumble-bee' },
                         { name: 'Megatron', slug: 'megatron' },
                     ]
@@ -138,23 +111,15 @@
             template: '#transformersContent',
         });
 
-        var error404 = Vue.component('error404', {
-            template: '#error404',
-        });
-
         var router = new VueRouter({
             //mode: 'history',
-            routes: [
-                { path: '/', name: 'home' },
-                {
-                    path: '/transformers', name: 'transformers', component: Transformers,
-                    props: { sidebar: 'dark' },
+            routes:[
+                {path: '/transformers', name: 'transformers', component: Transformers,
                     children: [
-                        { path: ':name', name: 'transformersContent', component: TransformersContent },
+                        {path: ':name', name: 'transformersContent', component: TransformersContent},
                     ],
                 },
-                { path: '/game-of-thrones', name: 'gameOfThrones', component: GameOfThrones },
-                { path: '*', name: 'error404', component: error404 },
+                {path: '/game-of-thrones', name: 'gameOfThrones', component: GameOfThrones},
             ],
         });
 
@@ -162,6 +127,10 @@
             el: "#app",
 
             router,
+
+            created() {
+                this.$router.push({ name: 'transformersContent' ,params: {name: 'optmus-prime'} });
+            },
 
             data: {
                 titulo: "Vuejs do jeito ninja",
